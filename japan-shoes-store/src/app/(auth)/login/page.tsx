@@ -1,6 +1,8 @@
 
 
 import Link from 'next/link'
+import Image from 'next/image'
+import Logo from '../../../../public/asyik-logo-removebg-preview.png'
 
 const LoginPage = () => {
   return (
@@ -8,9 +10,9 @@ const LoginPage = () => {
       <div className="max-w-md mx-auto">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black">MASUK</h1>
-          <div className="mt-4 w-16 h-16 mx-auto bg-black rounded-full flex items-center justify-center">
-            <span className="text-white text-2xl font-bold">JS</span>
+          <h1 className="text-3xl font-bold text-blue-600 mb-4">MASUK</h1>
+          <div className="flex justify-center">
+            <Image src={Logo} alt="Japan Shoes Logo" className="h-20 w-auto object-contain" width={120} height={80} />
           </div>
         </div>
 
@@ -34,7 +36,7 @@ const LoginPage = () => {
                 name="email"
                 required
                 placeholder="name@example.com"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -49,7 +51,7 @@ const LoginPage = () => {
                 name="password"
                 required
                 placeholder="••••••••"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -60,7 +62,7 @@ const LoginPage = () => {
                 id="terms"
                 name="terms"
                 required
-                className="mt-1 mr-2 h-4 w-4 text-black border-gray-300 rounded focus:ring-black"
+                className="mt-1 mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
                 Dengan ini, saya setuju untuk terikat dengan{' '}
@@ -73,7 +75,7 @@ const LoginPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition-colors shadow-md hover:shadow-lg"
             >
               Masuk
             </button>
@@ -105,7 +107,7 @@ const LoginPage = () => {
           </p>
           <Link 
             href="/register" 
-            className="inline-block bg-blue-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-semibold transition-colors shadow-md hover:shadow-lg"
           >
             Daftar sekarang
           </Link>

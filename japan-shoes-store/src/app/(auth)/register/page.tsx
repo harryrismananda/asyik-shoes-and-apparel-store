@@ -1,6 +1,8 @@
 
 
 import Link from 'next/link'
+import Image from 'next/image'
+import Logo from '../../../../public/asyik-logo-removebg-preview.png'
 
 const RegisterPage = () => {
   return (
@@ -8,9 +10,9 @@ const RegisterPage = () => {
       <div className="max-w-md mx-auto">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black">REGISTER</h1>
-          <div className="mt-4 w-16 h-16 mx-auto bg-black rounded-full flex items-center justify-center">
-            <span className="text-white text-2xl font-bold">JS</span>
+          <h1 className="text-3xl font-bold text-blue-600 mb-4">REGISTER</h1>
+          <div className="flex justify-center">
+            <Image src={Logo} alt="Japan Shoes Logo" className="h-20 w-auto object-contain" width={120} height={80} />
           </div>
         </div>
 
@@ -27,7 +29,7 @@ const RegisterPage = () => {
               <select
                 id="country"
                 name="country"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               >
                 <option>Indonesia</option>
               </select>
@@ -43,7 +45,7 @@ const RegisterPage = () => {
                 id="firstName"
                 name="firstName"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -57,7 +59,7 @@ const RegisterPage = () => {
                 id="lastName"
                 name="lastName"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -71,7 +73,7 @@ const RegisterPage = () => {
                 id="email"
                 name="email"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -83,7 +85,7 @@ const RegisterPage = () => {
               <select
                 id="gender"
                 name="gender"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -100,7 +102,7 @@ const RegisterPage = () => {
                 type="date"
                 id="dateOfBirth"
                 name="dateOfBirth"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -114,7 +116,7 @@ const RegisterPage = () => {
                 id="password"
                 name="password"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -128,7 +130,7 @@ const RegisterPage = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
 
@@ -145,7 +147,7 @@ const RegisterPage = () => {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-black"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
               </div>
             </div>
@@ -157,7 +159,7 @@ const RegisterPage = () => {
                 id="terms"
                 name="terms"
                 required
-                className="mt-1 mr-2 h-4 w-4 text-black border-gray-300 rounded focus:ring-black"
+                className="mt-1 mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
                 Dengan ini, saya setuju untuk terikat dengan{' '}
@@ -173,7 +175,7 @@ const RegisterPage = () => {
                 type="checkbox"
                 id="newsletter"
                 name="newsletter"
-                className="mt-1 mr-2 h-4 w-4 text-black border-gray-300 rounded focus:ring-black"
+                className="mt-1 mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
               />
               <label htmlFor="newsletter" className="text-sm text-gray-600">
                 Sign Up For Newsletter
@@ -183,7 +185,7 @@ const RegisterPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition-colors shadow-md hover:shadow-lg"
             >
               Buat Akun
             </button>
