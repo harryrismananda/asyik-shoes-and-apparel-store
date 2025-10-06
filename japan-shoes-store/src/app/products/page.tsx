@@ -2,7 +2,9 @@
 
 const ProductPage = () => {
   return (
-    <div>ProductPage</div>
+    <>
+    <h1 className="text-center text-3xl">Product Page</h1>
+    </>
   )
 }
 
