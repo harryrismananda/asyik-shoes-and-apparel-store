@@ -4,9 +4,9 @@ import Image from "next/image";
 const Navbar = () => {
   return (
     <>
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         {/* Top Banner */}
-        <div className="bg-black text-white text-center py-2 text-sm">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2.5 text-sm font-medium">
           <p>
             Gratis Ongkir hingga Rp 50.000 dengan Min. Pembelian Rp 1.000.000
           </p>
@@ -17,8 +17,8 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <div className="text-2xl font-bold text-black">
-                <Image src={Logo} alt="asyik-logo" className="w-50" />
+              <div className="h-25 w-auto">
+                <Image src={Logo} alt="asyik-logo" className="h-full w-full object-contain" width={120} height={48} />
               </div>
             </Link>
 
@@ -26,31 +26,31 @@ const Navbar = () => {
             <div className="hidden md:flex space-x-8">
               <Link
                 href="/products"
-                className="text-gray-700 hover:text-black font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
               >
                 PRODUCTS
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-black font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
               >
                 MEN
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-black font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
               >
                 WOMEN
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-black font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
               >
                 KIDS
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-black font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
               >
                 SALE
               </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-6">
-              <button className="text-gray-700 hover:text-black">
+              <button className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -73,7 +73,7 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
-              <Link href="/login" className="text-gray-700 hover:text-black">
+              <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -88,7 +88,7 @@ const Navbar = () => {
                   />
                 </svg>
               </Link>
-              <button className="text-gray-700 hover:text-black relative">
+              <button className="text-gray-700 hover:text-blue-600 transition-colors relative">
                 <svg
                   className="w-6 h-6"
                   fill="none"

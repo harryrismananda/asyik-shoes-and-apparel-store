@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
       {/* Newsletter Section */}
       <div className="border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -18,9 +18,9 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Masukkan email Anda"
-                className="flex-1 px-4 py-3 bg-white text-black rounded"
+                className="flex-1 px-4 py-3 bg-white text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded transition-colors">
+              <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors shadow-md hover:shadow-lg">
                 Daftar Sekarang
               </button>
             </div>
@@ -108,7 +108,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="text-sm text-gray-400">
-              <p>&copy; 2025 Japan Shoes Store. All rights reserved.</p>
+              <p>&copy; 2025 Asyik Store. All rights reserved.</p>
             </div>
           </div>
         </div>
