@@ -5,8 +5,8 @@ import bcrypt from "bcryptjs";
 const registerSchema = z.object({
   name: z.string(),
   username: z.string(),
-  email: z.email(),
-  password: z.string().min(5),
+  email: z.email("Invalid email format"),
+  password: z.string().min(5, "Password must be at least 5 characters long"),
 });
 
 interface IUser {
@@ -19,12 +19,20 @@ interface IUser {
 export default class User {
   static getCollection() {
     const db = getDb();
-    return db.collection("users");
+    return db.collection<IUser>("users");
   }
 
   static async register(payload: IUser): Promise<string> {
     registerSchema.parse(payload);
     const collection = this.getCollection();
+    const existingUser = await collection.findOne({email: payload.email});
+    const existingUsername = await collection.findOne({username: payload.username});
+    if(existingUsername) {
+      throw new Error("Username has been used");
+    }
+    if(existingUser) {
+      throw new Error("Email has been used");
+    }
     payload.password = bcrypt.hashSync(payload.password, 10);
     await collection.insertOne(payload);
     return "User registered successfully";
