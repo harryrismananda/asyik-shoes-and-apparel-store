@@ -3,9 +3,9 @@ import { getDb } from "../config/mongodb";
 import bcrypt from "bcryptjs";
 
 const registerSchema = z.object({
-  name: z.string(),
-  username: z.string(),
-  email: z.email("Invalid email format"),
+  name: z.string().min(1, "Name is required"),
+  username: z.string().min(1, "Username is required"),
+  email: z.email("Invalid email format").min(1, "Email is required"),
   password: z.string().min(5, "Password must be at least 5 characters long"),
 });
 
