@@ -34,7 +34,7 @@ Pada challenge ini, kamu diminta untuk membuat aplikasi client-server dengan det
   - [ ] Fitur Search
   - [X] Fitur Pagination (menggunakan infinite scroll)
   - [ ] Fitur Add to wishlist
-- [ ] Halaman Detail Product
+- [X] Halaman Detail Product
   - [ ] Fitur Add to wishlist
   - [ ] Implementasi Meta Tag di Head sesuai detail product
 - [ ] Halaman Wishlist Product

@@ -1,8 +1,14 @@
+import { ObjectId } from "mongodb";
+
 export interface IWishlist {
-  userId: string;
-  productId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  userId: ObjectId;
+  productId: ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface IParams {
+  params: Promise<{ id: string }>;
 }
 
 export interface IUser {
