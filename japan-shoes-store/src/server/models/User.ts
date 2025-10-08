@@ -42,7 +42,7 @@ export default class User {
     if (!isValid) {
       throw new UnauthorizedError("Invalid email or password");
     }
-    const token = signToken({ id: user._id });
+    const token = signToken({ id: user._id, username: user.username });
     return token;
   }
 
