@@ -3,18 +3,9 @@
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductCard from "@/components/ProductCard";
+import { IProduct } from "@/types/type";
 
-interface IProduct {
-  _id: string;
-  name: string;
-  slug: string;
-  price: number;
-  tags: string[];
-  thumbnail: string;
-  images: string[];
-  createdAt: Date;
-  updatedAt: Date;
-}
+
 
 const ProductPage = () => {
   const [products, setProducts] = useState<IProduct[]>([]);

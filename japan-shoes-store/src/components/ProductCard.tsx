@@ -1,22 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { IProductCardProps } from "@/types/type";
+import { formatPrice } from "@/utils/formatPrice";
 
-interface ProductCardProps {
-  name: string;
-  slug: string;
-  price: number;
-  thumbnail: string;
-  images?: string[];
-}
 
-const ProductCard = ({ name, slug, price, thumbnail, images = [] }: ProductCardProps) => {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
+
+const ProductCard = ({ name, slug, price, thumbnail, images = [] }: IProductCardProps) => {
 
   return (
     <Link href={`/products/${slug}`} className="group block">
