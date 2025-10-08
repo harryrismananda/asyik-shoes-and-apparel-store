@@ -1,10 +1,10 @@
 import { Db, MongoClient } from "mongodb";
 
-const uri: string = "mongodb+srv://admin:admin@cluster0.l4jc60j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const uri = process.env.MONGODB_URI
 
 let db: Db
 
-const client: MongoClient = new MongoClient(uri)
+const client: MongoClient = new MongoClient(uri as string)
 
 function connect(): Db {
   db = client.db("asyik_store")

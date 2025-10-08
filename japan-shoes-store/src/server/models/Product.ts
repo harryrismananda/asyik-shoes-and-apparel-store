@@ -1,16 +1,8 @@
+import { IProduct } from "@/types/type";
 import { getDb } from "../config/mongodb";
+import { BaseError, NotFoundError } from "../helpers/customError";
 
-interface IProduct {
-  name: string;
-  slug: string;
-  description: string;
-  price: number;
-  tags: string[];
-  images: string[];
-  thumbnail: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+
 
 
 export default class Product {
@@ -33,8 +25,14 @@ export default class Product {
   }
 
   static async getProductBySlug(slug: string): Promise<IProduct | null> {
+    if(!slug) {
+      throw new BaseError("Slug is required", 400);
+    }
     const collection = this.getCollection();
     const product = await collection.findOne({ slug });
+    if (!product) {
+      throw new NotFoundError("Product not found");
+    }
     return product;
   }
 }

@@ -1,6 +1,8 @@
+import { errorHandler } from "@/server/helpers/errorHandler";
 import Product from "@/server/models/Product";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     
     const { searchParams } = new URL(request.url);
@@ -24,7 +26,7 @@ export async function GET(request: Request) {
       { status: 200 }
     );
   } catch (error: unknown) {
-    console.log(error);
-    return Response.json({ message: "Internal Server Error" }, { status: 500 });
+    const {message, status} = errorHandler(error);
+    return Response.json({ message }, { status });
   }
 }

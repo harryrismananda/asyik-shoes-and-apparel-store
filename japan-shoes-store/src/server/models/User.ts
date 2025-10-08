@@ -1,20 +1,13 @@
-import z from "zod";
 import { getDb } from "../config/mongodb";
-import bcrypt from "bcryptjs";
+import { signToken } from "../helpers/jwt";
+import { comparePassword, hashPassword } from "../helpers/bcrypt";
+import { BaseError, UnauthorizedError } from "../helpers/customError";
+import { registerSchema } from "@/validations/validation";
+import { IUser } from "@/types/type";
 
-const registerSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  username: z.string().min(1, "Username is required"),
-  email: z.email("Invalid email format").min(1, "Email is required"),
-  password: z.string().min(5, "Password must be at least 5 characters long"),
-});
 
-interface IUser {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
+
+
 
 export default class User {
   static getCollection() {
@@ -27,14 +20,30 @@ export default class User {
     const collection = this.getCollection();
     const existingUser = await collection.findOne({email: payload.email});
     const existingUsername = await collection.findOne({username: payload.username});
+    // console.log(existingUsername);
     if(existingUsername) {
-      throw new Error("Username has been used");
+      throw new BaseError("Username has been used", 400);
     }
     if(existingUser) {
-      throw new Error("Email has been used");
+      throw new BaseError("Email has been used", 400);
     }
-    payload.password = bcrypt.hashSync(payload.password, 10);
+    payload.password = hashPassword(payload.password);
     await collection.insertOne(payload);
     return "User registered successfully";
   }
+
+  static async login(email: string, password: string): Promise<string> {
+    const collection = this.getCollection();
+    const user = await collection.findOne({ email });
+    if (!user) {
+      throw new UnauthorizedError("Invalid email or password");
+    }
+    const isValid = comparePassword(password, user.password);
+    if (!isValid) {
+      throw new UnauthorizedError("Invalid email or password");
+    }
+    const token = signToken({ id: user._id });
+    return token;
+  }
+
 }
