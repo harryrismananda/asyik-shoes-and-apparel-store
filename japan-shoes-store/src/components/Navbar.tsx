@@ -79,7 +79,7 @@ const Navbar = async () => {
             </div>
 
             {/* Right Side Icons */}
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-6 gap-5">
               <SearchForm />
               {/* <button className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
@@ -96,7 +96,8 @@ const Navbar = async () => {
                   />
                 </svg>
               </button> */}
-              {token ? <Button type="Logout" style="text-black hover:text-blue-600 transition-colors" onClick={handleLogout} /> : <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
+              {token ? <Button type="Logout" style="text-black hover:text-blue-600 transition-colors" onClick={handleLogout} /> : 
+              <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors flex flex-row mr-5">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -110,7 +111,9 @@ const Navbar = async () => {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                LOGIN
+                <p className="flex items-center mx-5">
+                  LOGIN
+                  </p>
               </Link>}
               <button className="text-gray-700 hover:text-blue-600 transition-colors relative">
                 <svg
