@@ -6,6 +6,27 @@ export interface IWishlist {
   createdAt?: Date;
   updatedAt?: Date;
 }
+export interface IWishlistDetail {
+  _id: ObjectId;
+  userId: ObjectId;
+  productId: ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
+  productDetail: {
+    _id: ObjectId;
+    name: string;
+    slug: string;
+    price: number;
+    excerpt: string;
+    description: string;
+    tags: string[];
+    images: string[];
+    thumbnail: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+}
+
 
 export interface IParams {
   params: Promise<{ id: string }>;
@@ -19,7 +40,7 @@ export interface IUser {
 }
 
 export interface IProduct {
-  _id: string;
+  _id: ObjectId;
   name: string;
   slug: string;
   price: number;
