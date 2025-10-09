@@ -31,7 +31,7 @@ Pada challenge ini, kamu diminta untuk membuat aplikasi client-server dengan det
   - [ ] Featured Product (5-10 product) + “see-all”
 - [X] Halaman Product
 - [X] List Product
-  - [ ] Fitur Search
+  - [X] Fitur Search
   - [X] Fitur Pagination (menggunakan infinite scroll)
   - [X] Fitur Add to wishlist
 - [X] Halaman Detail Product
@@ -49,5 +49,5 @@ Pada challenge ini, kamu diminta untuk membuat aplikasi client-server dengan det
 - [X] Fitur show detail product
 - [X] Fitur add to wishlist
 - [X] Fitur remove wishlist
-- [ ] Fitur search product berdasarkan nama (implement menerapkan debounce)
+- [X] Fitur search product berdasarkan nama (implement menerapkan debounce)
 - [X] Fitur pagination (implement infinite scroll)

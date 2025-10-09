@@ -1,87 +1,93 @@
-import { formatPrice } from "@/utils/formatPrice"
+import { formatPrice } from "@/utils/formatPrice";
 import { IDetail, IDetailParams } from "@/types/type";
 import AddWishlist from "@/components/AddWishlist";
 import ImageGallery from "@/components/ImageGallery";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
+const fetchProduct = async (slug: string): Promise<IDetail> => {
+  const resp = await fetch(`http://localhost:3000/api/products/${slug}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data: IDetail = await resp.json();
+  if (!resp.ok) {
+    notFound();
+  }
+  return data;
+};
 
-
-const fetchProduct = async ({params}: IDetailParams): Promise<IDetail> => {
-    const {slug} = params
-    const resp = await fetch(`http://localhost:3000/api/products/${slug}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      return resp.json()
-   }
-
-
-export const generateMetadata = async ({params}: IDetailParams): Promise <Metadata> => {
-  const product:IDetail = await fetchProduct({params})
+export const generateMetadata = async ({
+  params,
+}: IDetailParams): Promise<Metadata> => {
+  const { slug } = await params;
+  const product: IDetail = await fetchProduct(slug);
 
   return {
     title: product.product.name,
     description: product.product.excerpt,
     keywords: product.product.tags,
-    openGraph :{
+    openGraph: {
       title: product.product.name,
-      images: product.product.thumbnail
-    }
-  }
-}
+      images: product.product.thumbnail,
+    },
+  };
+};
 
-const ProductDetailPage = async ({params}: IDetailParams) => {
-  try {
-    const product:IDetail = await fetchProduct({params})
-    return (
-      <div className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Left Side - Images */}
-            <div className="space-y-4">
- 
-              <ImageGallery images={product.product.images} productName={product.product.name} productThumbnail={product.product.thumbnail} />
+const ProductDetailPage = async ({ params }: IDetailParams) => {
+  const { slug } = await params;
+  const product: IDetail = await fetchProduct(slug);
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Left Side - Images */}
+          <div className="space-y-4">
+            <ImageGallery
+              images={product.product.images}
+              productName={product.product.name}
+              productThumbnail={product.product.thumbnail}
+            />
+          </div>
+
+          {/* Right Side - Product Info */}
+          <div className="space-y-6">
+            {/* Product Title */}
+            <div>
+              <h1 className="text-2xl text-black lg:text-3xl font-bold uppercase tracking-wide mb-2">
+                {product.product.name}
+              </h1>
+              <p className="text-sm text-gray-600 uppercase tracking-wider">
+                {product.product.slug}
+              </p>
             </div>
 
-            {/* Right Side - Product Info */}
-            <div className="space-y-6">
-              {/* Product Title */}
-              <div>
-                <h1 className="text-2xl text-black lg:text-3xl font-bold uppercase tracking-wide mb-2">
-                  {product.product.name}
-                </h1>
-                <p className="text-sm text-gray-600 uppercase tracking-wider">
-                  {product.product.slug}
-                </p>
+            {/* Price */}
+            <div className="border-t border-b border-gray-200 py-4">
+              <p className="text-2xl font-bold text-gray-900">
+                {formatPrice(product.product.price)}
+              </p>
+            </div>
+
+            {/* Tags */}
+            {product.product.tags && product.product.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {product.product.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 text-black py-1 bg-gray-100 text-xs font-semibold uppercase tracking-wider"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
+            )}
 
-              {/* Price */}
-              <div className="border-t border-b border-gray-200 py-4">
-                <p className="text-2xl font-bold text-gray-900">
-                  {formatPrice(product.product.price)}
-                </p>
-              </div>
-
-              {/* Tags */}
-              {product.product.tags && product.product.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {product.product.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 text-black py-1 bg-gray-100 text-xs font-semibold uppercase tracking-wider"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Size Selector */}
-              <div>
-                {/* <div className="flex items-center justify-between mb-3">
+            {/* Size Selector */}
+            <div>
+              {/* <div className="flex items-center justify-between mb-3">
                   <label className="text-sm text-black font-semibold uppercase tracking-wide">
                     Pilih Ukuran
                   </label>
@@ -89,7 +95,7 @@ const ProductDetailPage = async ({params}: IDetailParams) => {
                     Panduan Ukuran
                   </button>
                 </div> */}
-                {/* <div className="grid grid-cols-5 gap-2">
+              {/* <div className="grid grid-cols-5 gap-2">
                   {sizes.map((size) => (
                     <button
                       key={size}
@@ -104,13 +110,16 @@ const ProductDetailPage = async ({params}: IDetailParams) => {
                     </button>
                   ))}
                 </div> */}
-              </div>
+            </div>
 
-              {/* Action Buttons */}
-              <div className="space-y-3 pt-4">
-                <AddWishlist productId={product.product._id} style="w-full border-2 border-black text-black py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" />
-              </div>
-              {/* <div className="space-y-3 pt-4">
+            {/* Action Buttons */}
+            <div className="space-y-3 pt-4">
+              <AddWishlist
+                productId={product.product._id}
+                style="w-full border-2 border-black text-black py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+            </div>
+            {/* <div className="space-y-3 pt-4">
                 <button
                   onClick={handleAddToCart}
                   className="w-full bg-black text-white py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
@@ -140,74 +149,61 @@ const ProductDetailPage = async ({params}: IDetailParams) => {
                 </button>
               </div> */}
 
-              {/* Product Description */}
-              <div className="border-t border-gray-200 pt-6">
-                <h2 className="text-lg text-black font-bold uppercase tracking-wide mb-3">
-                  Deskripsi Produk
-                </h2>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {product.product.description}
-                </p>
-              </div>
+            {/* Product Description */}
+            <div className="border-t border-gray-200 pt-6">
+              <h2 className="text-lg text-black font-bold uppercase tracking-wide mb-3">
+                Deskripsi Produk
+              </h2>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {product.product.description}
+              </p>
+            </div>
 
-              {/* Additional Info */}
-              <div className="border-t border-gray-200 pt-6 space-y-4">
-                <details className="group">
-                  <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
-                    Detail Produk
-                    <span className="transition-transform group-open:rotate-180">
-                      ▼
-                    </span>
-                  </summary>
-                  <div className="mt-4 text-sm text-gray-700 space-y-2">
-                    <p>• Material: Synthetic & Mesh</p>
-                    <p>• Sole: Rubber</p>
-                    <p>• Weight: Approx. 280g (Size 37)</p>
-                    <p>• Made in Vietnam</p>
-                  </div>
-                </details>
+            {/* Additional Info */}
+            <div className="border-t border-gray-200 pt-6 space-y-4">
+              <details className="group">
+                <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
+                  Detail Produk
+                  <span className="transition-transform group-open:rotate-180">
+                    ▼
+                  </span>
+                </summary>
+                <div className="mt-4 text-sm text-gray-700 space-y-2">
+                  <p>• Material: Synthetic & Mesh</p>
+                  <p>• Sole: Rubber</p>
+                  <p>• Weight: Approx. 280g (Size 37)</p>
+                  <p>• Made in Vietnam</p>
+                </div>
+              </details>
 
-                <details className="group border-t border-gray-200 pt-4">
-                  <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
-                    Pengiriman & Pengembalian
-                    <span className="transition-transform group-open:rotate-180">
-                      ▼
-                    </span>
-                  </summary>
-                  <div className="mt-4 text-sm text-gray-700 space-y-2">
-                    <p>• Gratis ongkir seluruh Indonesia</p>
-                    <p>• Estimasi pengiriman 2-5 hari kerja</p>
-                    <p>• Pengembalian gratis dalam 30 hari</p>
-                  </div>
-                </details>
-              </div>
+              <details className="group border-t border-gray-200 pt-4">
+                <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
+                  Pengiriman & Pengembalian
+                  <span className="transition-transform group-open:rotate-180">
+                    ▼
+                  </span>
+                </summary>
+                <div className="mt-4 text-sm text-gray-700 space-y-2">
+                  <p>• Gratis ongkir seluruh Indonesia</p>
+                  <p>• Estimasi pengiriman 2-5 hari kerja</p>
+                  <p>• Pengembalian gratis dalam 30 hari</p>
+                </div>
+              </details>
             </div>
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 
-
-
-  } catch (error) {
-    console.log(error);
-  }
   // console.log(product.product);
   // Sample sizes - you can adjust based on your data
   // const sizes = ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"];
-
-
-
-
 
   // const handleAddToWishlist = () => {
   //   // TODO: Implement add to wishlist functionality
   //   alert(`Menambahkan ${product?.name} ke wishlist`);
   // };
-
-
-
-
 };
 
 export default ProductDetailPage;

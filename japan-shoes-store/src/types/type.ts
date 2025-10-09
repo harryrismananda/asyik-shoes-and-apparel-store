@@ -72,9 +72,7 @@ export interface IDetail {
 }
 
 export interface IDetailParams {
-  params: {
-    slug: string
-  }
+  params: Promise<{slug: string}>
 }
 
 export interface IImageGalleryProps {

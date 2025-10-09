@@ -48,7 +48,7 @@ const ProductPage = () => {
 
   const loadMore = () => {
     const nextPage = page + 1;
-    setPage(nextPage);
+    setPage(() => nextPage);
     fetchProducts(nextPage, search, false);
   };
 

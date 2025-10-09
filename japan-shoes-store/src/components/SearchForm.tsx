@@ -1,7 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 
 
@@ -12,17 +13,21 @@ const SearchForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target;
     setQuery(value)
+    handleSearch(value)
   }
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSearch = useDebouncedCallback((value) => {
+    router.push(`/products?query=${value}`);
+  }, 300)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     router.push(`/products?query=${query}`);
   }
 
-
   return (
     <>
-      <form onSubmit={handleSearch} className="w-full max-w-md">
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
         <div className="relative">
           <input
             type="text"
