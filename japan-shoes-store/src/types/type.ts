@@ -115,3 +115,13 @@ export interface WishlistCardProps {
   product: IWishlistProductDetail;
   onRemove: (productId: string) => void;
 }
+
+export interface IFeaturedProduct {
+  _id: string;
+  name: string;
+  slug: string;
+  price: number;
+  thumbnail: string;
+  images: string[];
+  tags: string[];
+}
