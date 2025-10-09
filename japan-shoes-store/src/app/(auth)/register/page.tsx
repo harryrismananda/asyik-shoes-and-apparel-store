@@ -58,22 +58,22 @@ const RegisterPage = () => {
       <div className="max-w-md mx-auto">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600 mb-4">REGISTER</h1>
-          <div className="flex justify-center">
-            <Image src={Logo} alt="Japan Shoes Logo" className="h-20 w-auto object-contain" width={120} height={80} />
+          <div className="flex justify-center mb-4">
+            <Image src={Logo} alt="Japan Shoes Logo" className="h-32 w-auto object-contain" width={160} height={128} />
           </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">REGISTER</h1>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-center mb-6 text-black">Buat Akun</h2>
+        <div className="bg-white rounded-lg shadow-xl p-8 border border-gray-200">
+          <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">Buat Akun</h2>
           
           <form className="space-y-4" onSubmit={(e) => handleSubmit(e, formData)}>
           
             {/* Full Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name <span className="text-red-500">*</span>
+                Full Name <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -83,14 +83,14 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   handleChange(e)
                 }}
-                className="w-full  px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                className="w-full  px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               />
             </div>
 
             {/* Username */}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                Username <span className="text-red-500">*</span>
+                Username <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -100,14 +100,14 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   handleChange(e)
                 }}
-                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               />
             </div>
 
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email <span className="text-red-500">*</span>
+                Email <span className="text-red-600">*</span>
               </label>
               <input
                 type="email"
@@ -117,14 +117,14 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   handleChange(e)
                 }}
-                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               />
             </div>
 
             {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                Password <span className="text-red-500">*</span>
+                Password <span className="text-red-600">*</span>
               </label>
               <input
                 type="password"
@@ -134,14 +134,14 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   handleChange(e)
                 }}
-                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                className="w-full px-3 py-2 text-gray-900 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
               />
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition-colors shadow-md hover:shadow-lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition-colors shadow-lg hover:shadow-xl"
             >
               Buat Akun
             </button>
@@ -159,8 +159,8 @@ const RegisterPage = () => {
         </div>
 
         {/* Reward Section */}
-        <div className="mt-8 bg-gray-100 rounded-lg p-6">
-          <h3 className="text-lg font-bold mb-2">REWARD YOUR MIND, REWARD YOUR BODY</h3>
+        <div className="mt-8 bg-white border border-gray-200 rounded-lg p-6 shadow-md">
+          <h3 className="text-lg font-bold mb-2 text-gray-900">REWARD YOUR MIND, REWARD YOUR BODY</h3>
           <p className="text-sm text-gray-600">
             Bergabunglah dengan OneASICS™ Sekarang Dapatkan poin, nikmati hadiah eksklusif, 
             dan akses ke berbagai keistimewaan khusus anggota!

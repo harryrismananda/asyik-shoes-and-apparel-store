@@ -14,7 +14,7 @@ Silahkan setup project aplikasi kamu:
     - [X] Login
   - [X] Halaman home
     - [X] Komponen Banner
-    - [ ] Komponen Detail info Ecommerce
+    - [X] Komponen Detail info Ecommerce
     - [X] Komponen Featured Product (5-10 product) + “see-all”
   - [X] Halaman product
     - [X] Komponen List Product
@@ -37,7 +37,7 @@ Silahkan setup project aplikasi kamu:
   - [X] Halaman login: /login
   - [X] Halaman home: /
     - [X] Komponen Banner
-    - [ ] Komponen Detail info Ecommerce
+    - [X] Komponen Detail info Ecommerce
     - [X] Komponen Featured Product (5-10 product) + “see-all”
   - [X] Halaman product: /products
     - [X] Komponen List Product

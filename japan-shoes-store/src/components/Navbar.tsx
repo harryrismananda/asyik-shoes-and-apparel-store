@@ -20,9 +20,9 @@ const Navbar = async () => {
   
   return (
     <>
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+      <nav className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50 shadow-lg">
         {/* Top Banner */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2.5 text-sm font-medium">
+        <div className="bg-gradient-to-r from-gray-800 to-gray-700 text-white text-center py-2.5 text-sm font-medium">
           <p>
             Gratis Ongkir hingga Rp 50.000 dengan Min. Pembelian Rp 1.000.000
           </p>
@@ -34,7 +34,7 @@ const Navbar = async () => {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <div className="h-25 w-auto">
-                <Image src={Logo} alt="asyik-logo" className="h-full w-full object-contain" width={120} height={48} />
+                <Image src={Logo} alt="asyik-logo" className="h-full w-full object-contain brightness-0 invert" width={120} height={48} />
               </div>
             </Link>
 
@@ -42,37 +42,37 @@ const Navbar = async () => {
             <div className="hidden md:flex space-x-8">
               <Link
                 href="/products"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 PRODUCTS
               </Link>
               {token && <Link
                 href="/wishlist"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 WISHLISTS
               </Link>}
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 MEN
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 WOMEN
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 KIDS
               </Link>
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+                className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
                 SALE
               </Link>
@@ -81,7 +81,7 @@ const Navbar = async () => {
             {/* Right Side Icons */}
             <div className="flex items-center space-x-6 gap-5">
               <SearchForm />
-              {/* <button className="text-gray-700 hover:text-blue-600 transition-colors">
+              {/* <button className="text-gray-300 hover:text-white transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -96,8 +96,8 @@ const Navbar = async () => {
                   />
                 </svg>
               </button> */}
-              {token ? <Button type="Logout" style="text-black hover:text-blue-600 transition-colors" onClick={handleLogout} /> : 
-              <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors flex flex-row mr-5">
+              {token ? <Button type="Logout" style="text-gray-300 hover:text-white transition-colors" onClick={handleLogout} /> : 
+              <Link href="/login" className="text-gray-300 hover:text-white transition-colors flex flex-row mr-5">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -115,7 +115,7 @@ const Navbar = async () => {
                   LOGIN
                   </p>
               </Link>}
-              <button className="text-gray-700 hover:text-blue-600 transition-colors relative">
+              <button className="text-gray-300 hover:text-white transition-colors relative">
                 <svg
                   className="w-6 h-6"
                   fill="none"
