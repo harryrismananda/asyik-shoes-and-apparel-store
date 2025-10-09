@@ -79,11 +79,11 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <div className="w-full bg-white py-12">
+    <div className="w-full bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold uppercase tracking-wide mb-2">
+          <h2 className="text-3xl lg:text-4xl font-bold uppercase tracking-wide mb-2 text-gray-900">
             Featured Products
           </h2>
           <p className="text-gray-600">Discover our handpicked selection</p>
@@ -94,7 +94,7 @@ const FeaturedProducts = () => {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-xl border-2 border-gray-300 transition-all duration-200"
             aria-label="Previous product"
           >
             <svg
@@ -114,7 +114,7 @@ const FeaturedProducts = () => {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-xl border-2 border-gray-300 transition-all duration-200"
             aria-label="Next product"
           >
             <svg
@@ -142,9 +142,9 @@ const FeaturedProducts = () => {
                 >
                   <div className="max-w-sm mx-auto">
                     <Link href={`/products/${product.slug}`} className="group block">
-                      <div className="bg-white rounded-sm overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-200">
+                      <div className="bg-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:shadow-2xl border-2 border-gray-800 shadow-lg">
                         {/* Product Image */}
-                        <div className="relative aspect-square bg-gray-50 overflow-hidden">
+                        <div className="relative aspect-square bg-gray-700 overflow-hidden">
                           <Image
                             src={product.thumbnail}
                             alt={product.name}
@@ -155,7 +155,7 @@ const FeaturedProducts = () => {
                           
                           {/* Pack Collection Badge */}
                           {product.images && product.images.length > 1 && (
-                            <div className="absolute top-3 left-3 bg-black text-white px-3 py-1 text-[10px] font-semibold uppercase tracking-wider">
+                            <div className="absolute top-3 left-3 bg-blue-600 text-white px-3 py-1 text-[10px] font-semibold uppercase tracking-wider">
                               Pack Collection
                             </div>
                           )}
@@ -169,7 +169,7 @@ const FeaturedProducts = () => {
                               {product.tags.slice(0, 2).map((tag, index) => (
                                 <span
                                   key={index}
-                                  className="px-2 py-1 bg-gray-100 text-[9px] font-semibold uppercase tracking-wider text-gray-700"
+                                  className="px-2 py-1 bg-gray-700 text-[9px] font-semibold uppercase tracking-wider text-gray-300"
                                 >
                                   {tag}
                                 </span>
@@ -178,17 +178,17 @@ const FeaturedProducts = () => {
                           )}
 
                           {/* Product Name */}
-                          <h3 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-3 line-clamp-2 min-h-[2.5rem]">
+                          <h3 className="text-sm font-bold uppercase tracking-wide text-white mb-3 line-clamp-2 min-h-[2.5rem]">
                             {product.name}
                           </h3>
 
                           {/* Price */}
-                          <p className="text-lg font-bold text-gray-900 mb-3">
+                          <p className="text-lg font-bold text-white mb-3">
                             {formatPrice(product.price)}
                           </p>
 
                           {/* View Details Button */}
-                          <div className="w-full bg-black text-white py-2 text-xs font-bold uppercase tracking-wider text-center group-hover:bg-gray-800 transition-colors">
+                          <div className="w-full bg-blue-600 text-white py-2 text-xs font-bold uppercase tracking-wider text-center group-hover:bg-blue-700 transition-colors">
                             View Details
                           </div>
                         </div>
@@ -209,7 +209,7 @@ const FeaturedProducts = () => {
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide
                     ? "bg-blue-600 w-6 sm:w-8"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    : "bg-gray-400 hover:bg-gray-500"
                 }`}
                 aria-label={`Go to product ${index + 1}`}
               />
@@ -221,7 +221,7 @@ const FeaturedProducts = () => {
         <div className="text-center mt-8">
           <Link
             href="/products"
-            className="inline-block bg-black text-white py-3 px-8 text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors"
+            className="inline-block bg-blue-600 text-white py-3 px-8 text-sm font-bold uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
           >
             View All Products
           </Link>

@@ -35,7 +35,7 @@ const SearchForm = () => {
             onChange={handleChange}
             value={query}
             placeholder="Search products..."
-            className="w-full text-black border border-gray-300 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
