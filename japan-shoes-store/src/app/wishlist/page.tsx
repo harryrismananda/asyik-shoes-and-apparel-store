@@ -4,29 +4,41 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import WishlistCard from "@/components/WishlistCard";
 import { IWishlistDetail } from "@/types/type";
+import { showError } from "@/utils/alert";
+import { useRouter } from "next/navigation";
+
+
 
 const WishlistPage = () => {
+  const router = useRouter()
   const [wishlistItems, setWishlistItems] = useState<IWishlistDetail[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchWishlist();
-  }, []);
+ 
 
-  const fetchWishlist = async () => {
+  const fetchWishlist = async ():Promise<void> => {
     try {
       const response = await fetch("/api/wishlists");
       const data = await response.json();
 
       if (response.ok && data.wishlists) {
-        setWishlistItems(data.wishlists);
+        return setWishlistItems(data.wishlists);
+      } else {
+        throw new Error(data.message);
       }
-    } catch (error) {
-      console.error("Error fetching wishlist:", error);
+    } catch (error:unknown) {
+      console.log("Error fetching wishlist:", error);
+      showError(error as string);
+      router.push("/login");
+      return;
     } finally {
       setLoading(false);
     }
   };
+  
+  useEffect(() => {
+    fetchWishlist();
+  }, []);
 
   const handleRemove = async (productId: string) => {
     setWishlistItems(prevItems =>
@@ -47,7 +59,7 @@ const WishlistPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wide mb-2">
+          <h1 className="text-3xl text-black lg:text-4xl font-bold uppercase tracking-wide mb-2">
             My Wishlist
           </h1>
           <p className="text-gray-600">

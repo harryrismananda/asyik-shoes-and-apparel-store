@@ -5,25 +5,9 @@ import Link from "next/link";
 import { formatPrice } from "@/utils/formatPrice";
 import { useState } from "react";
 import { showError, showSuccessDeleteWishlist } from "@/utils/alert";
+import { WishlistCardProps } from "@/types/type";
 
-interface ProductDetail {
-  _id: string;
-  name: string;
-  slug: string;
-  price: number;
-  excerpt?: string;
-  description?: string;
-  tags: string[];
-  images: string[];
-  thumbnail: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
 
-interface WishlistCardProps {
-  product: ProductDetail;
-  onRemove: (productId: string) => void;
-}
 
 const WishlistCard = ({ product, onRemove }: WishlistCardProps) => {
   const [isRemoving, setIsRemoving] = useState(false);
@@ -79,7 +63,7 @@ const WishlistCard = ({ product, onRemove }: WishlistCardProps) => {
             
             {/* Tags */}
             {product.tags && product.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1 mb-2">
+              <div className="flex flex-wrap gap-1 mb-2 text-black">
                 {product.tags.slice(0, 3).map((tag, index) => (
                   <span
                     key={index}

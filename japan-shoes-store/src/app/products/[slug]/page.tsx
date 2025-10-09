@@ -1,63 +1,49 @@
-import Image from "next/image";
 import { formatPrice } from "@/utils/formatPrice"
-import { IProduct } from "@/types/type";
+import { IDetail, IDetailParams } from "@/types/type";
 import AddWishlist from "@/components/AddWishlist";
+import ImageGallery from "@/components/ImageGallery";
+import { Metadata } from "next";
 
-interface IDetail {
-  product: IProduct;
-}
 
-const ProductDetailPage = async ({params,}: {params: Promise<{ slug: string }>}) => {
-const {slug} = await params
-  try {
-      const resp = await fetch(`http://localhost:3000/api/products/${slug}`, {
+
+const fetchProduct = async ({params}: IDetailParams): Promise<IDetail> => {
+    const {slug} = params
+    const resp = await fetch(`http://localhost:3000/api/products/${slug}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       })
-      const product:IDetail = await resp.json()
 
+      return resp.json()
+   }
+
+
+export const generateMetadata = async ({params}: IDetailParams): Promise <Metadata> => {
+  const product:IDetail = await fetchProduct({params})
+
+  return {
+    title: product.product.name,
+    description: product.product.excerpt,
+    keywords: product.product.tags,
+    openGraph :{
+      title: product.product.name,
+      images: product.product.thumbnail
+    }
+  }
+}
+
+const ProductDetailPage = async ({params}: IDetailParams) => {
+  try {
+    const product:IDetail = await fetchProduct({params})
     return (
       <div className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Side - Images */}
             <div className="space-y-4">
-              {/* Main Image */}
-              <div className="relative aspect-square bg-gray-50 overflow-hidden rounded-sm">
-                <Image
-                  src={product.product.thumbnail}
-                  alt={product.product.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
-              </div>
-
-              {/* Thumbnail Gallery */}
-              {/* <div className="grid grid-cols-4 gap-2">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative aspect-square bg-gray-50 overflow-hidden rounded-sm border-2 transition-all ${
-                      selectedImage === index
-                        ? "border-black"
-                        : "border-transparent hover:border-gray-300"
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${product.name} view ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="100px"
-                    />
-                  </button>
-                ))}
-              </div> */}
+ 
+              <ImageGallery images={product.product.images} productName={product.product.name} productThumbnail={product.product.thumbnail} />
             </div>
 
             {/* Right Side - Product Info */}
@@ -95,14 +81,14 @@ const {slug} = await params
 
               {/* Size Selector */}
               <div>
-                <div className="flex items-center justify-between mb-3">
+                {/* <div className="flex items-center justify-between mb-3">
                   <label className="text-sm text-black font-semibold uppercase tracking-wide">
                     Pilih Ukuran
                   </label>
                   <button className="text-xs text-black underline hover:no-underline">
                     Panduan Ukuran
                   </button>
-                </div>
+                </div> */}
                 {/* <div className="grid grid-cols-5 gap-2">
                   {sizes.map((size) => (
                     <button
@@ -122,7 +108,7 @@ const {slug} = await params
 
               {/* Action Buttons */}
               <div className="space-y-3 pt-4">
-                <AddWishlist productId={product.product._id} />
+                <AddWishlist productId={product.product._id} style="w-full border-2 border-black text-black py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" />
               </div>
               {/* <div className="space-y-3 pt-4">
                 <button
@@ -167,7 +153,7 @@ const {slug} = await params
               {/* Additional Info */}
               <div className="border-t border-gray-200 pt-6 space-y-4">
                 <details className="group">
-                  <summary className="flex justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
+                  <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
                     Detail Produk
                     <span className="transition-transform group-open:rotate-180">
                       ▼
@@ -182,7 +168,7 @@ const {slug} = await params
                 </details>
 
                 <details className="group border-t border-gray-200 pt-4">
-                  <summary className="flex justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
+                  <summary className="flex text-black justify-between items-center cursor-pointer font-semibold uppercase text-sm tracking-wide">
                     Pengiriman & Pengembalian
                     <span className="transition-transform group-open:rotate-180">
                       ▼
