@@ -2,12 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { IProductCardProps } from "@/types/type";
 import { formatPrice } from "@/utils/formatPrice";
+import AddWishlist from "./AddWishlist";
 
 
 
-const ProductCard = ({ name, slug, price, thumbnail, images = [] }: IProductCardProps) => {
-
+const ProductCard = ({ _id, name, slug, price, thumbnail, images = [] }: IProductCardProps) => {
+ 
   return (
+    <>
+    <div className="flex flex-col">
+
     <Link href={`/products/${slug}`} className="group block">
       <div className="bg-white rounded-sm overflow-hidden transition-all duration-300 hover:shadow-lg">
         {/* Product Image Container */}
@@ -51,6 +55,9 @@ const ProductCard = ({ name, slug, price, thumbnail, images = [] }: IProductCard
         </div>
       </div>
     </Link>
+    <AddWishlist productId={_id} style="w-full border-2 border-black text-black py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" />
+    </div>
+    </>
   );
 };
 

@@ -14,11 +14,11 @@ try {
     if(protectedRoutes.includes(req.nextUrl.pathname) || req.nextUrl.pathname.startsWith("/api/wishlists/")){
     const cookieStore = await cookies();
     const token = cookieStore.get("access_token")
-    if(!token) throw new UnauthorizedError("Authentication required");
+    if(!token) throw new UnauthorizedError("Authentication required, please login");
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
     const jwt = token.value
     const { payload } = await jose.jwtVerify<{id: string, username: string}>(jwt, secret);
-    console.log("<<< ini payload di middleware", payload);
+    // console.log("<<< ini payload di middleware", payload);
     const requestHeaders = new Headers(req.headers)
     requestHeaders.set('x-user-id', payload.id)
     requestHeaders.set("x-user-name", payload.username)
@@ -32,7 +32,7 @@ try {
   }
   
 } catch (error:unknown) {
-  console.log("<<< ini error di middleware", error);
+  // console.log("<<< ini error di middleware", error);
   const {message, status} = errorHandler(error);
   return Response.json({ message }, { status });
 }

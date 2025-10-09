@@ -59,9 +59,61 @@ export interface Ilogin{
 }
 
 export interface IProductCardProps {
+  _id: ObjectId;
   name: string;
   slug: string;
   price: number;
   thumbnail: string;
   images: string[];
+}
+
+export interface IDetail {
+  product: IProduct;
+}
+
+export interface IDetailParams {
+  params: {
+    slug: string
+  }
+}
+
+export interface IImageGalleryProps {
+  images: string[];
+  productName: string;
+  productThumbnail: string;
+}
+
+export interface IErrorResponse {
+  message: string;
+  status: number;
+}
+
+export interface IButtonProps {
+  type: string
+  onClick?: () => void
+  style?: string
+}
+
+export interface AddWishlistProps {
+  productId: ObjectId;
+  style: string
+}
+
+export interface IWishlistProductDetail {
+  _id: string;
+  name: string;
+  slug: string;
+  price: number;
+  excerpt?: string;
+  description?: string;
+  tags: string[];
+  images: string[];
+  thumbnail: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface WishlistCardProps {
+  product: IWishlistProductDetail;
+  onRemove: (productId: string) => void;
 }

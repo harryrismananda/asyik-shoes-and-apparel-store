@@ -1,7 +1,22 @@
 import Link from "next/link";
 import Logo from "../../public/asyik-logo-removebg-preview.png";
 import Image from "next/image";
-const Navbar = () => {
+import { cookies } from "next/headers";
+import Button from "./Button";
+import { redirect } from "next/navigation";
+
+  const handleLogout = async () => {
+    "use server"
+    const cookieStore = await cookies();
+    cookieStore.delete("access_token")
+    redirect("/login")
+  }
+
+const Navbar = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  
   return (
     <>
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
@@ -30,6 +45,12 @@ const Navbar = () => {
               >
                 PRODUCTS
               </Link>
+              {token && <Link
+                href="/wishlist"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
+              >
+                WISHLISTS
+              </Link>}
               <Link
                 href="/"
                 className="text-gray-700 hover:text-blue-600 font-medium transition-colors border-b-2 border-transparent hover:border-blue-600"
@@ -73,7 +94,7 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
-              <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
+              {token ? <Button type="Logout" style="text-black hover:text-blue-600 transition-colors" onClick={handleLogout} /> : <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -87,7 +108,8 @@ const Navbar = () => {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-              </Link>
+                LOGIN
+              </Link>}
               <button className="text-gray-700 hover:text-blue-600 transition-colors relative">
                 <svg
                   className="w-6 h-6"
