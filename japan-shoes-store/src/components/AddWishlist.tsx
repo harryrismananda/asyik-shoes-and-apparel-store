@@ -31,7 +31,7 @@ const AddWishlist = ({ productId, style }: AddWishlistProps) => {
       setIsInWishlist(true);
       return showSuccessAddWishlist(data.message as string)
     } catch (error:unknown) {
-      console.error("Error adding to wishlist:", error);
+      // console.error("Error adding to wishlist:", error);
       showErrorAddWishlist(error as string)
     } finally {
       setIsAdding(false);

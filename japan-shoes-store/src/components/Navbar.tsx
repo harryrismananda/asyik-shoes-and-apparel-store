@@ -4,6 +4,7 @@ import Image from "next/image";
 import { cookies } from "next/headers";
 import Button from "./Button";
 import { redirect } from "next/navigation";
+import SearchForm from "./SearchForm";
 
   const handleLogout = async () => {
     "use server"
@@ -79,7 +80,8 @@ const Navbar = async () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-6">
-              <button className="text-gray-700 hover:text-blue-600 transition-colors">
+              <SearchForm />
+              {/* <button className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -93,7 +95,7 @@ const Navbar = async () => {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-              </button>
+              </button> */}
               {token ? <Button type="Logout" style="text-black hover:text-blue-600 transition-colors" onClick={handleLogout} /> : <Link href="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
                 <svg
                   className="w-6 h-6"

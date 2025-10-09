@@ -4,12 +4,12 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    
+    // console.log(request.nextUrl, "<<< ini url nya");
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
     const limit = 16;
-
-    const products = await Product.getAllProducts(page, limit);
+    const query = searchParams.get("query") || ""
+    const products = await Product.getAllProducts(page, limit, query)
     const total = await Product.getTotalProducts();
     // console.log(products);
 

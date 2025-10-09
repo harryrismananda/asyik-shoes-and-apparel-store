@@ -11,11 +11,13 @@ export default class Product {
     return db.collection<IProduct>("products");
   }
 
-  static async getAllProducts (page:number = 1, limit: number = 16): Promise<IProduct[]> {
-    const filter = {};
+  static async getAllProducts (page:number = 1, limit: number = 16, query: string): Promise<IProduct[]> {
     const skip = (page - 1) * limit;
     const collection = this.getCollection();
-    const products = await collection.find(filter).sort({createdAt: -1}).skip(skip).limit(limit+1).toArray();
+    console.log(query, "<<< ini query di model");
+    const search = {name: {$regex: new RegExp(query, "i")}};
+    // console.log(search)
+    const products = await collection.find(search).sort({createdAt: -1}).skip(skip).limit(limit+1).toArray();
     return products;
   }
   static async getTotalProducts (): Promise<number> {
