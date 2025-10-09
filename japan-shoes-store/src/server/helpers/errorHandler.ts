@@ -1,12 +1,12 @@
 import { ZodError } from "zod";
 import { BaseError, ForbiddenError, NotFoundError, UnauthorizedError } from "./customError";
+import { JWSInvalid, JWSSignatureVerificationFailed } from "jose/errors";
+import { IErrorResponse } from "@/types/type";
 
-interface IErrorResponse {
-  message: string;
-  status: number;
-}
+
 
 export const errorHandler = (err: unknown): IErrorResponse => {
+  // if (err) console.log(err, "<<< errorHandler");
   if (err instanceof ZodError) {
     const issues = err.issues;
     const message = issues[0]?.message || "Validation error";
@@ -19,6 +19,8 @@ export const errorHandler = (err: unknown): IErrorResponse => {
     return { message: err.message, status: err.status };
   } else if (err instanceof ForbiddenError) {
     return { message: err.message, status: err.status };
+  } else if (err instanceof JWSInvalid || err instanceof JWSSignatureVerificationFailed){
+    return { message: "Invalid token", status: 401 };
   } else {
     return { message: "Internal server error", status: 500 };
   }
