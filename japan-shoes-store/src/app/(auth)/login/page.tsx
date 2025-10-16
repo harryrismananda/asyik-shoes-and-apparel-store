@@ -3,16 +3,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Logo from '../../../../public/asyik-logo-removebg-preview.png'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { showError, showSuccessLogin } from '@/utils/alert'
 import { Ilogin } from '@/types/type'
 import { setCookie } from './actions'
 import { useRouter } from 'next/navigation'
+import AuthContext from '@/contexts/AuthContext'
 
 
 
 
 const LoginPage = () => {
+  const authContext = useContext(AuthContext)
   const router = useRouter()  
   const [formData, setFormData] = useState<Ilogin>({
     email: '',
@@ -28,7 +30,7 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, formData: Ilogin) => {
     e.preventDefault()
     try {
-      const resp = await fetch(`http://localhost:3000/api/login`, {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +44,9 @@ const LoginPage = () => {
         throw new Error(data.message)
       } 
       setCookie('access_token', data.token)
+      authContext.setAuth(true)
       showSuccessLogin()
-      router.push('/')
+      router.replace('/')
       return
     } catch (error: unknown) {
       return showError(error as string)

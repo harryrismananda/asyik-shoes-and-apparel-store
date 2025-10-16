@@ -1,22 +1,19 @@
+"use client"
 import Link from "next/link";
 import Logo from "../../public/asyik-logo-removebg-preview.png";
 import Image from "next/image";
-import { cookies } from "next/headers";
 import Button from "./Button";
-import { redirect } from "next/navigation";
 import SearchForm from "./SearchForm";
+import { handleLogout } from "./actions";
+import AuthContext from "@/contexts/AuthContext";
+import { useContext } from "react";
 
-  const handleLogout = async () => {
-    "use server"
-    const cookieStore = await cookies();
-    cookieStore.delete("access_token")
-    redirect("/login")
-  }
 
-const Navbar = async () => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("access_token");
 
+
+const Navbar =  () => {
+  const authContext = useContext(AuthContext)
+ 
   
   return (
     <>
@@ -46,7 +43,7 @@ const Navbar = async () => {
               >
                 PRODUCTS
               </Link>
-              {token && <Link
+              {authContext.auth && <Link
                 href="/wishlist"
                 className="text-gray-300 hover:text-white font-medium transition-colors border-b-2 border-transparent hover:border-blue-500"
               >
@@ -96,7 +93,7 @@ const Navbar = async () => {
                   />
                 </svg>
               </button> */}
-              {token ? <Button type="Logout" style="text-gray-300 hover:text-white transition-colors" onClick={handleLogout} /> : 
+              {authContext.auth ? <Button type="Logout" style="text-gray-300 hover:text-white transition-colors" onClick={handleLogout} /> : 
               <Link href="/login" className="text-gray-300 hover:text-white transition-colors flex flex-row mr-5">
                 <svg
                   className="w-6 h-6"

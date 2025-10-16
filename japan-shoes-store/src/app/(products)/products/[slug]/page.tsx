@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 const fetchProduct = async (slug: string): Promise<IDetail> => {
-  const resp = await fetch(`http://localhost:3000/api/products/${slug}`, {
+  const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${slug}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

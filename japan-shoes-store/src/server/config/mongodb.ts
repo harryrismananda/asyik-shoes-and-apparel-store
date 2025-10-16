@@ -7,7 +7,7 @@ let db: Db
 const client: MongoClient = new MongoClient(uri as string)
 
 function connect(): Db {
-  db = client.db("asyik_store")
+  db = client.db(process.env.MONGO_DB_NAME)
   return db
 }
 

@@ -43,7 +43,7 @@ const ProductPage = () => {
     const searchQuery = searchParams.get("query") || ""
     // console.log(searchQuery, "<<<<<< INI DI EFFECT")
     setSearch(searchQuery)
-    fetchProducts(1, search, true);
+    fetchProducts(1, searchQuery, true);
   }, [searchParams, search]);
 
   const loadMore = () => {
